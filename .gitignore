@@ -12,30 +12,57 @@
 
 # testing
 /coverage
+/.nyc_output
 
 # next.js
 /.next/
 /out/
+/build
+/dist
 
 # production
-/build
+/.vercel/
+/.turbo/
 
-# misc
-.DS_Store
+# env files (never commit secrets)
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# local app secrets and certificates
 *.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
 
-# debug
+# database / local data
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+
+# logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
+pnpm-debug.log*
+*.log
 
-# env files (can opt-in for committing if needed)
-.env*
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
 
-# vercel
-.vercel
-
-# typescript
+# generated files
 *.tsbuildinfo
 next-env.d.ts
+
+# package manager cache (optional)
+.eslintcache
+.env.local

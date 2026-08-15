@@ -17,7 +17,9 @@ async function submitForm(payload: {
     body: JSON.stringify(payload),
   });
 
-  const data = (await res.json().catch(() => null)) as { error?: string } | null;
+  const data = (await res.json().catch(() => null)) as {
+    error?: string;
+  } | null;
 
   if (!res.ok) {
     throw new Error(data?.error || "Failed to send your message.");
@@ -94,7 +96,10 @@ export function ContactForm() {
         />
       </label>
 
-      <button type="submit" className="btn-primary focus-ring mt-4 disabled:opacity-60" disabled={loading}>
+      <button
+        type="submit"
+        className="btn-primary focus-ring mt-4 disabled:opacity-60"
+        disabled={loading}>
         {loading ? (
           <>
             <Loader2 className="h-4 w-4 animate-spin" /> Sending…
@@ -104,8 +109,12 @@ export function ContactForm() {
         )}
       </button>
 
-      {status === "ok" && <p className="mt-3 text-sm text-ok">Your message was sent.</p>}
-      {status === "err" && error && <p className="mt-3 text-sm text-danger">{error}</p>}
+      {status === "ok" && (
+        <p className="mt-3 text-sm text-ok">Your message was sent.</p>
+      )}
+      {status === "err" && error && (
+        <p className="mt-3 text-sm text-danger">{error}</p>
+      )}
     </form>
   );
 }
@@ -137,7 +146,13 @@ export function ReviewForm() {
           text: string;
           role?: string;
         }>;
-        prev.unshift({ id: `local-${Date.now()}`, name, role: "Community", rating, text: message });
+        prev.unshift({
+          id: `local-${Date.now()}`,
+          name,
+          role: "Community",
+          rating,
+          text: message,
+        });
         localStorage.setItem(key, JSON.stringify(prev.slice(0, 20)));
       } catch {
         /* ignore local storage issues */
@@ -190,8 +205,18 @@ export function ReviewForm() {
           {Array.from({ length: 5 }).map((_, i) => {
             const value = i + 1;
             return (
-              <button key={value} type="button" className="focus-ring rounded p-1" onClick={() => setRating(value)} aria-label={`${value} stars`}>
-                <Star className={cn("h-5 w-5", value <= rating ? "fill-warn text-warn" : "text-line")} />
+              <button
+                key={value}
+                type="button"
+                className="focus-ring rounded p-1"
+                onClick={() => setRating(value)}
+                aria-label={`${value} stars`}>
+                <Star
+                  className={cn(
+                    "h-5 w-5",
+                    value <= rating ? "fill-warn text-warn" : "text-line",
+                  )}
+                />
               </button>
             );
           })}
@@ -210,7 +235,10 @@ export function ReviewForm() {
         />
       </label>
 
-      <button type="submit" className="btn-primary focus-ring mt-4 disabled:opacity-60" disabled={loading}>
+      <button
+        type="submit"
+        className="btn-primary focus-ring mt-4 disabled:opacity-60"
+        disabled={loading}>
         {loading ? (
           <>
             <Loader2 className="h-4 w-4 animate-spin" /> Sending…
@@ -220,8 +248,12 @@ export function ReviewForm() {
         )}
       </button>
 
-      {status === "ok" && <p className="mt-3 text-sm text-ok">Thanks for the review.</p>}
-      {status === "err" && error && <p className="mt-3 text-sm text-danger">{error}</p>}
+      {status === "ok" && (
+        <p className="mt-3 text-sm text-ok">Thanks for the review.</p>
+      )}
+      {status === "err" && error && (
+        <p className="mt-3 text-sm text-danger">{error}</p>
+      )}
     </form>
   );
 }

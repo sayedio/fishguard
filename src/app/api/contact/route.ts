@@ -25,12 +25,17 @@ export async function POST(request: Request) {
   const parsed = schema.safeParse(json);
 
   if (!parsed.success) {
-    return NextResponse.json({ error: "Please fill all fields correctly." }, { status: 400 });
+    return NextResponse.json(
+      { error: "Please fill all fields correctly." },
+      { status: 400 },
+    );
   }
 
   const apiKey = process.env.RESEND_API_KEY?.trim();
   const to = process.env.CONTACT_TO_EMAIL?.trim();
-  const from = process.env.RESEND_FROM_EMAIL?.trim() || "PhishGuard <onboarding@resend.dev>";
+  const from =
+    process.env.RESEND_FROM_EMAIL?.trim() ||
+    "PhishGuard <onboarding@resend.dev>";
 
   if (!apiKey || !to) {
     return NextResponse.json(
@@ -72,6 +77,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("Resend email failed", error);
-    return NextResponse.json({ error: "Could not send your message. Please check your email settings and try again." }, { status: 500 });
+    return NextResponse.json(
+      {
+        error:
+          "Could not send your message. Please check your email settings and try again.",
+      },
+      { status: 500 },
+    );
   }
 }

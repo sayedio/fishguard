@@ -43,15 +43,23 @@ export function ReviewsSection() {
               Real checks. <span className="gradient-text">Real calm.</span>
             </h2>
           </div>
-          <Link href="/contact" className="btn-secondary focus-ring hidden sm:inline-flex">
+          <Link
+            href="/contact"
+            className="btn-secondary focus-ring hidden sm:inline-flex">
             Write a review
           </Link>
         </Reveal>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-3">
           {reviews.slice(0, 3).map((review, i) => (
-            <Reveal as="article" key={review.id} delay={i * 0.1} className="panel card-hover flex flex-col p-6">
-              <div className="flex gap-0.5" aria-label={`${review.rating} of 5`}>
+            <Reveal
+              as="article"
+              key={review.id}
+              delay={i * 0.1}
+              className="panel card-hover flex flex-col p-6">
+              <div
+                className="flex gap-0.5"
+                aria-label={`${review.rating} of 5`}>
                 {Array.from({ length: 5 }).map((_, idx) => (
                   <Star
                     key={idx}
@@ -59,20 +67,26 @@ export function ReviewsSection() {
                   />
                 ))}
               </div>
-              <p className="mt-4 flex-1 text-sm leading-relaxed text-fg">&ldquo;{review.text}&rdquo;</p>
+              <p className="mt-4 flex-1 text-sm leading-relaxed text-fg">
+                &ldquo;{review.text}&rdquo;
+              </p>
               <div className="mt-5 flex items-center gap-3 border-t border-line pt-4">
                 <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-accent to-accent-2 text-xs font-bold text-white">
                   {review.name.charAt(0)}
                 </span>
                 <div>
                   <p className="text-sm font-semibold text-fg">{review.name}</p>
-                  {review.role && <p className="text-xs text-fg-muted">{review.role}</p>}
+                  {review.role && (
+                    <p className="text-xs text-fg-muted">{review.role}</p>
+                  )}
                 </div>
               </div>
             </Reveal>
           ))}
         </div>
-        <Link href="/contact" className="btn-secondary focus-ring mt-6 inline-flex sm:hidden">
+        <Link
+          href="/contact"
+          className="btn-secondary focus-ring mt-6 inline-flex sm:hidden">
           Write a review
         </Link>
       </div>

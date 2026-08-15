@@ -15,9 +15,12 @@ export default function ContactPage() {
           <div className="max-w-2xl">
             <span className="eyebrow">Contact</span>
             <h1 className="mt-4 font-display text-3xl font-bold tracking-tight text-fg sm:text-4xl">
-              Say hello or <span className="gradient-text">leave a review.</span>
+              Say hello or{" "}
+              <span className="gradient-text">leave a review.</span>
             </h1>
-            <p className="mt-3 text-sm text-fg-muted">Keep it short. Don&rsquo;t send passwords or OTPs.</p>
+            <p className="mt-3 text-sm text-fg-muted">
+              Keep it short. Don&rsquo;t send passwords or OTPs.
+            </p>
           </div>
 
           <div className="mt-8 grid gap-6 xl:grid-cols-2">

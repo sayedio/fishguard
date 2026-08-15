@@ -16,7 +16,9 @@ export function AnimatedCounter({
   duration?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(() =>
+    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches ? to : 0,
+  );
   const started = useRef(false);
 
   useEffect(() => {
@@ -25,7 +27,6 @@ export function AnimatedCounter({
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduce) {
-      setValue(to);
       return;
     }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { Star } from "lucide-react";
 import { SEED_REVIEWS } from "@/lib/constants";
@@ -15,20 +15,23 @@ type Review = {
 };
 
 export function ReviewsSection() {
-  const [reviews, setReviews] = useState<Review[]>([...SEED_REVIEWS]);
+  const [reviews] = useState<Review[]>(() => {
+    const fallback = [...SEED_REVIEWS];
+    if (typeof window === "undefined") return fallback;
 
-  useEffect(() => {
     try {
       const raw = localStorage.getItem("phishguard_reviews");
-      if (!raw) return;
+      if (!raw) return fallback;
       const parsed = JSON.parse(raw) as Review[];
       if (Array.isArray(parsed) && parsed.length) {
-        setReviews([...parsed, ...SEED_REVIEWS].slice(0, 6));
+        return [...parsed, ...SEED_REVIEWS].slice(0, 6);
       }
     } catch {
       /* ignore */
     }
-  }, []);
+
+    return fallback;
+  });
 
   return (
     <section id="reviews" className="section-pad py-16 sm:py-24">
